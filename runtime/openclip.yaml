@@ -1,0 +1,17 @@
+# Inferless Custom Runtime
+#
+# Custom Runtime allows you to customize the container to have the software and dependency that we need to run OpenCLIP. 
+# system_packages : 
+# These are any libraries that you need for the model to run, for eg: "opencv" for image processing or like "ffmpeg" to open the audio files. 
+# python_packages :
+# These are pip-based libraries that you need in your Python runtime for example torch is required to load PyTorch-based models 
+
+
+build:
+  system_packages:
+    - "libssl-dev"
+
+  python_packages:
+    - "open-clip-torch==2.23.0"
+    - "Pillow==9.3.0"
+    - "torch --extra-index-url https://download.pytorch.org/whl/cu121"
