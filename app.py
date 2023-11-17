@@ -1,19 +1,17 @@
+from config import MODEL_NAME, MODEL_PRETRAINED, MODEL_ID, CACHE_DIR
 import torch
 # from PIL import Image
 import open_clip
 import time
 
-MODEL_NAME = 'ViT-B-32'
-MODEL_PRETRAINED = 'laion2b_s34b_b79k'
-MODEL = 'laion/CLIP-ViT-B-32-laion2B-s34B-b79K'
+
 
 class InferlessPythonModel:
-
 
     # Implement the Load function here for the model
 	def initialize(self):
 		self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-		self.model, _, self.preprocess = open_clip.create_model_and_transforms(MODEL_NAME, pretrained=MODEL_PRETRAINED, cache_dir='/var/nfs-mount/openclip-cache', device=self.device)
+		self.model, _, self.preprocess = open_clip.create_model_and_transforms(MODEL_NAME, pretrained=MODEL_PRETRAINED, cache_dir=CACHE_DIR, device=self.device)
 		self.tokenizer = open_clip.get_tokenizer(MODEL_NAME)
 
 
@@ -35,7 +33,7 @@ class InferlessPythonModel:
 
 		image_embeddings = []
 		return {	
-			"model": MODEL,
+			"model": MODEL_ID,
 			"inputs" : inputs,
 			"embeddings": text_embeddings + image_embeddings,
 			"duration": time.perf_counter() - start_time
@@ -46,7 +44,7 @@ class InferlessPythonModel:
 		self.device, self.model, self.preprocess, self.tokenizer = None
 
 
-# o = InferlessPythonModel()
-# o.initialize()
-# result = o.infer({"text":"red sofa"})
-# print(result)
+o = InferlessPythonModel()
+o.initialize()
+result = o.infer({"text":"red sofa"})
+print(result)
