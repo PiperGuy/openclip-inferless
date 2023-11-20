@@ -56,13 +56,9 @@ The following is a sample Input and Output JSON for this model which you can use
   "inputs": [
     {
       "name": "text",
-      "shape": [
-        1
-      ],
+      "shape": [-1],
       "datatype": "BYTES",
-      "data": [
-        "red sofa"
-      ]
+      "data": ["red sofa"]
     }
   ]
 }
@@ -73,17 +69,30 @@ The following is a sample Input and Output JSON for this model which you can use
 {
   "outputs": [
     {
-      "name": "result",
+      "name": "embeddings",
+      "shape": [-1,-1],
       "datatype": "FP32",
-      "shape": [
-        -1,
-        -1
-      ],
       "data": [
+        [
         -0.07819648087024689,
         1.3333008289337158,
         -0.10979261249303818,
         -0.27275943756103516
+        ]
+      ]
+    },
+	{
+	  "name": "model",
+      "shape": [1],
+      "datatype": "BYTES",
+      "data": ["openclip-ViT-B-32-laion2B"]
+      ]
+    },
+	{
+	  "name": "duration",
+      "shape": [1],
+      "datatype": "FP16",
+      "data": ["2.0"]
       ]
     }
   ]

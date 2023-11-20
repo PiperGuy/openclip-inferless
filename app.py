@@ -44,7 +44,7 @@ class InferlessPythonModel:
 		self.device, self.model, self.preprocess, self.tokenizer = None
 
 
-o = InferlessPythonModel()
-o.initialize()
-result = o.infer({"text":"red sofa"})
-print(result)
+# o = InferlessPythonModel()
+# o.initialize()
+# result = o.infer({"text":"red sofa"})
+# print(result)
