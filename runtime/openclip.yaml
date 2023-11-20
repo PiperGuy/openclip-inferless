@@ -14,4 +14,4 @@ build:
   python_packages:
     - "open-clip-torch==2.23.0"
     - "Pillow==9.3.0"
-    - "torch --extra-index-url https://download.pytorch.org/whl/cu121"
+    # - "torch --extra-index-url https://download.pytorch.org/whl/cu121"

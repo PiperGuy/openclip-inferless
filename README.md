@@ -85,15 +85,13 @@ The following is a sample Input and Output JSON for this model which you can use
 	  "name": "model",
       "shape": [1],
       "datatype": "BYTES",
-      "data": ["openclip-ViT-B-32-laion2B"]
-      ]
+      "data": ["OpenCLIP-ViT-B-32-laion2B"]
     },
 	{
 	  "name": "duration",
       "shape": [1],
       "datatype": "FP16",
       "data": ["2.0"]
-      ]
     }
   ]
 }

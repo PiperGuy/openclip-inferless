@@ -1,9 +1,7 @@
 from config import MODEL_NAME, MODEL_PRETRAINED, MODEL_ID, CACHE_DIR
-import torch
-# from PIL import Image
+from PIL import Image
+import torch, base64, io, time
 import open_clip
-import time
-
 
 
 class InferlessPythonModel:
@@ -21,30 +19,34 @@ class InferlessPythonModel:
 		# e.g. in the below code the input name is "prompt"
 		# prompt = inputs["prompt"]
 
-		if (inputs.get("text") == None):
+		if (inputs.get("text") == None and inputs.get("image") == None):
 			raise ValueError("the parameter 'Inputs' must contain 'text' or 'image' value") 
 
 		start_time = time.perf_counter()
+		text_features = image_features = []
 
+		# get text embbeddings
+		if (inputs.get("text") != None):
+			text = self.tokenizer(inputs.get("text")).to(self.device)
+			text_features = self.model.encode_text(text).tolist()
 
+		# get image embeddings
+		if (inputs.get("image") != None):
+			# convert it into bytes  
+			im_bytes = base64.b64decode(inputs.get("image").encode('utf-8'))
+			# convert bytes data to PIL Image object
+			im_obj = Image.open(io.BytesIO(im_bytes))
 
-		text = self.tokenizer(inputs.get("text")).to(self.device)
-		text_embeddings = self.model.encode_text(text).tolist()
+			clip_image = self.preprocess(im_obj).unsqueeze(0).to(self.device)
+			image_features = self.model.encode_image(clip_image).tolist()
 
-		image_embeddings = []
 		return {	
 			"model": MODEL_ID,
 			"inputs" : inputs,
-			"embeddings": text_embeddings + image_embeddings,
+			"embeddings": text_features + image_features,
 			"duration": time.perf_counter() - start_time
 			}
 
 	# perform any cleanup activity here
 	def finalize(self, args):
 		self.device, self.model, self.preprocess, self.tokenizer = None
-
-
-# o = InferlessPythonModel()
-# o.initialize()
-# result = o.infer({"text":"red sofa"})
-# print(result)
