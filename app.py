@@ -26,12 +26,12 @@ class InferlessPythonModel:
 		text_features = image_features = []
 
 		# get text embbeddings
-		if (inputs.get("text") != None):
+		if (inputs.get("text")):
 			text = self.tokenizer(inputs.get("text")).to(self.device)
 			text_features = self.model.encode_text(text).tolist()
 
 		# get image embeddings
-		if (inputs.get("image") != None):
+		if (inputs.get("image")):
 			# convert it into bytes  
 			im_bytes = base64.b64decode(inputs.get("image").encode('utf-8'))
 			# convert bytes data to PIL Image object
