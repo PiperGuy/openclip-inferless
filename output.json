@@ -1,0 +1,40 @@
+{
+	"outputs": [
+	  {
+		"name": "embeddings",
+		"shape": [
+		  -1,
+		  -1
+		],
+		"datatype": "FP64",
+		"data": [
+		  [
+			-0.07819648087024689,
+			1.3333008289337158,
+			-0.10979261249303818,
+			-0.27275943756103516
+		  ]
+		]
+	  },
+	  {
+		"name": "model",
+		"shape": [
+		  1
+		],
+		"datatype": "BYTES",
+		"data": [
+		  "OpenClip-ViT-B-32-laion2B"
+		]
+	  },
+	  {
+		"name": "duration",
+		"shape": [
+		  1
+		],
+		"datatype": "FP64",
+		"data": [
+		  "2.0"
+		]
+	  }
+	]
+  }

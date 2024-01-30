@@ -1,0 +1,45 @@
+# Inferless config file (version: 1.0.0)
+version: 1.0.0
+
+name: OPENCLIP33
+import_source: LOCAL
+
+# you can choose the options between ONNX, TENSORFLOW, PYTORCH
+source_framework_type: PYTORCH
+
+configuration:
+  # if you want to use a custom runtime, add the runtime id below.
+  # you can find it by running `inferless runtime list` or create one with `inferless runtime upload` and update this file it by running `inferless runtime select --id <RUNTIME_ID>`.
+  # NOTE: this is not yet supported for Serverless
+  custom_runtime_id: 4a72417e-1daa-4c90-82a5-0d503996277a
+
+  # if you want to use a custom volume, add the volume id and name below,
+  # you can find it by running `inferless volume list` or create one with `inferless volume create -n {VOLUME_NAME}`
+  # NOTE: this is not yet supported for Serverless
+  custom_volume_id: 903d2b71-c0fd-4c2e-9c5e-42a9c2f4baf6
+  custom_volume_name: openclip-cache
+
+  gpu_type: T4
+  inference_time: '180'
+  is_dedicated: false
+  is_serverless: false
+  max_replica: '1'
+  min_replica: '0'
+  scale_down_delay: '60'
+  vcpu: '1.5'
+  ram: '10'
+env:
+  # Add your environment variables here
+  # ENV: 'PROD'
+  MODEL_ID: OpenCLIP-ViT-B-32-laion2B
+  MODEL_NAME: ViT-B-32
+  MODEL_PRETRAINED: laion2b_s34b_b79k
+  CACHE_DIR: /var/nfs-mount/openclip-cache
+secrets:
+  # Add your secret ids here you can find it by running `inferless secrets list`
+  # - 65723205-ce21-4392-a10b-3tf00c58988c
+optional:
+  # you can update file names here
+  input_file_name: input.json
+  output_file_name: output.json
+  runtime_file_name: inferless-runtime-config.yaml
