@@ -40,7 +40,14 @@ class InferlessPythonModel:
 
 			clip_image = self.preprocess(im_obj).unsqueeze(0).to(self.device)
 			image_features = self.model.encode_image(clip_image).tolist()
+		output = {	
+			"model": MODEL_ID,
+			"inputs" : json.dumps(inputs),
+			"embeddings": text_features + image_features,
+			"duration": time.perf_counter() - start_time
+			}
 
+		print(output, flush=True)
 		return {	
 			"model": MODEL_ID,
 			"inputs" : json.dumps(inputs),
