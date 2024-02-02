@@ -1,5 +1,6 @@
 from config import MODEL_NAME, MODEL_PRETRAINED, MODEL_ID, CACHE_DIR
 from PIL import Image
+import json
 import torch, base64, io, time
 import open_clip
 
@@ -42,7 +43,7 @@ class InferlessPythonModel:
 
 		return {	
 			"model": MODEL_ID,
-			"inputs" : inputs,
+			"inputs" : json.dumps(inputs),
 			"embeddings": text_features + image_features,
 			"duration": time.perf_counter() - start_time
 			}
