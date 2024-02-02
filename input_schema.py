@@ -1,7 +1,7 @@
 INPUT_SCHEMA = {
     "text": {
         'datatype': 'STRING',
-        'required': False,
+        'required': True,
         'shape': [1],
         'example': ["red sofa"]
     },
