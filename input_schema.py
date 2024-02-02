@@ -6,7 +6,7 @@ INPUT_SCHEMA = {
         'example': ["red sofa"]
     },
     'image': {
-        'datatype': 'BYTES',
+        'datatype': 'STRING',
         'required': False,
 		'shape': [1],
         'example': [
